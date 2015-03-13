@@ -154,10 +154,13 @@
                  LocalMessage *localMessage = [[LocalMessage alloc] init];
                  localMessage.tag = MessageTypeText;
                  localMessage.text = [msg valueForKey:@"BalaContent"];
-                 localMessage.email = [msg valueForKey:@"BalerEmail"];
-                 if (localMessage.text == nil || ((NSNull *)localMessage.text == [NSNull null])) {
-                     continue;
+                 if ((NSNull *)localMessage.text == [NSNull null]) {
+                    localMessage.tag = MessageTypeImage;
                  }
+                 localMessage.email = [msg valueForKey:@"BalerEmail"];
+                 localMessage.imageURL = [msg valueForKey:@"Photo"];
+                 localMessage.portriatURL = [msg valueForKey:@"Portrait"];
+
                  [self.messages addObject:localMessage];
              }
              [self.tableView reloadData];

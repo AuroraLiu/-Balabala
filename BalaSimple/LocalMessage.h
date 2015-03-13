@@ -22,6 +22,8 @@ typedef enum{
 @property (nonatomic) MessageType tag;
 @property (nonatomic, strong) NSString * text;
 @property (nonatomic, strong) NSURL * imageURL;
+@property (nonatomic, strong) UIImage* portriat;
+@property (nonatomic, strong) NSURL * portriatURL;
 @property (nonatomic, strong) UIImage* image;
 @property (nonatomic, strong) NSDate * time;
 @property (nonatomic, strong) NSString *email;
