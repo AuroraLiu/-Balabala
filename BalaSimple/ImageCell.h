@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LocalMessage.h"
+#import "MessagesController.h"
 
 @interface ImageCell : UITableViewCell
-@property (nonatomic, strong) NSURL* imageURL;
+@property (weak,nonatomic) MessagesController* messageController;
+@property (strong, nonatomic) UIImageView *avatarImageView;
+@property (nonatomic, strong) LocalMessage* message;
 @property (strong, nonatomic) NSNumber* colorIndex;
+
+- (void) loadImage;
 - (NSNumber*) height;
 @end

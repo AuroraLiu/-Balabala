@@ -156,10 +156,15 @@
                  localMessage.text = [msg valueForKey:@"BalaContent"];
                  if ((NSNull *)localMessage.text == [NSNull null]) {
                     localMessage.tag = MessageTypeImage;
+                     
                  }
                  localMessage.email = [msg valueForKey:@"BalerEmail"];
-                 localMessage.imageURL = [msg valueForKey:@"Photo"];
-                 localMessage.portriatURL = [msg valueForKey:@"Portrait"];
+                 
+                 if ([msg valueForKey:@"Photo"] != [NSNull null])
+                 localMessage.imageURL = [NSURL URLWithString:[msg valueForKey:@"Photo"]];
+                 if ([msg valueForKey:@"Portrait"] != [NSNull null]) {
+                     localMessage.portriatURL =[NSURL URLWithString: [msg valueForKey:@"Portrait"]];
+                 }
 
                  [self.messages addObject:localMessage];
              }
@@ -273,12 +278,13 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
                 break;
             case MessageTypeImage:
                 cell = [[ImageCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIndentifer];
+                break;
             default:
                 cell = [[TextCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIndentifer];
                 break;
         }
     }
-    
+    [cell setValue:self forKey:@"messageController"];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
@@ -314,13 +320,17 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     LocalMessage* msg = self.messages[indexPath.row];
     switch (msg.tag) {
         case MessageTypeText:
+        {
             cell.textLabel.text = msg.text;
-            
+            TextCell* textCell = (TextCell*)cell;
+            textCell.message = msg;
+        }
             break;
         case MessageTypeImage:
         {
             ImageCell* imageCell = (ImageCell*)cell;
-            imageCell.imageURL = msg.imageURL;
+            imageCell.message = msg;
+            [imageCell loadImage];
         }
             break;
         default:
