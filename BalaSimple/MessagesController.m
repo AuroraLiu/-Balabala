@@ -34,6 +34,9 @@
     if (_messages == nil) {
         _messages = [[NSMutableArray alloc] init];
     }
+//    [self fetchAction:nil];
+//    UIPanGestureRecognizer *recognizer =
+//    [[UIPanGestureRecognizer alloc]initWithTarget:self
 
 //    UISwipeGestureRecognizer *recognizer =
 //    [[UISwipeGestureRecognizer alloc]initWithTarget:self
@@ -230,7 +233,9 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
         case 2:
         {
             UIImagePickerController* picker = [[UIImagePickerController alloc] init];
-            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            picker.sourceType = buttonIndex == 1
+            ? UIImagePickerControllerSourceTypePhotoLibrary
+            : UIImagePickerControllerSourceTypeCamera;
             picker.delegate = self;
             picker.allowsEditing = YES;
             
