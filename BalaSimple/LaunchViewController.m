@@ -93,7 +93,7 @@
      {
          NSLog(@"start handle long response");
          if (connectionError != nil) {
-             NSLog(@"Error during log In");
+             NSLog(@"Error during log In, error message: %@", connectionError);
              return;
          }else{
              if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
