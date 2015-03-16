@@ -52,9 +52,14 @@ static const int len = 150;
             NSData* data = [NSData dataWithContentsOfURL:self.message.imageURL];
             self.message.image = [[UIImage imageWithData:data] scaleToSize:CGSizeMake(len, len)];
         }
-        if (self.message.portriat == nil && self.message.portriatURL != nil) {
-            NSData* pData = [NSData dataWithContentsOfURL:self.message.portriatURL];
-            self.message.portriat = [[UIImage imageWithData:pData] scaleToSize:CGSizeMake(avatarH, avatarH)];
+        if (self.message.portriat == nil) {
+            if ( self.message.portriatURL != nil) {
+                NSData* pData = [NSData dataWithContentsOfURL:self.message.portriatURL];
+                self.message.portriat = [[UIImage imageWithData:pData] scaleToSize:CGSizeMake(avatarH, avatarH)];
+            }else{
+                self.message.portriat = [UIImage imageNamed:@"Inori"];
+            }
+
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
