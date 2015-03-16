@@ -33,7 +33,6 @@ static const int len = 150;
 }
 
 - (void)layoutSubviews{
-    CGFloat len = 120;//self.frame.size.width-3*pad+avatarH;
     self.imageView.frame = CGRectMake(2*pad+avatarH, pad, len, len);
     self.avatarImageView.frame = CGRectMake(pad, len - avatarH, avatarH, avatarH);
 }
@@ -43,7 +42,6 @@ static const int len = 150;
 }
 
 - (void) loadImage{
-   // dispatch_queue_t queue = dispatch_queue_create("loadImage",NULL);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSLog(@"imageURL:%@\npURL:%@"
               ,self.message.imageURL
@@ -71,11 +69,6 @@ static const int len = 150;
     });
     
 }
-
-- (void)awakeFromNib {
-    // Initialization code
-}
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

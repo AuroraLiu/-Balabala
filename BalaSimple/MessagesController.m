@@ -34,15 +34,6 @@
     if (_messages == nil) {
         _messages = [[NSMutableArray alloc] init];
     }
-//    [self fetchAction:nil];
-//    UIPanGestureRecognizer *recognizer =
-//    [[UIPanGestureRecognizer alloc]initWithTarget:self
-
-//    UISwipeGestureRecognizer *recognizer =
-//    [[UISwipeGestureRecognizer alloc]initWithTarget:self
-//                                             action:@selector(fetchAction:)];
-//    [self.view addGestureRecognizer:recognizer];
-//    self.tableView.tableHeaderView = self.activityIndicator;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -104,8 +95,6 @@
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (motion == UIEventSubtypeMotionShake)
     {
-        // User was shaking the device. Post a notification named "shake."
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"shake" object:self];
         [self fetchMessage];
     }
 }
@@ -161,8 +150,6 @@
              return;
          }
          NSLog(@"fetch response:%@",msgs);
-         sleep(3);
-
          
          dispatch_async(dispatch_get_main_queue(), ^{
              [self.activityIndicator stopAnimating];
@@ -307,25 +294,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat height;
     UITableViewCell* cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
     height = [(NSNumber*)[cell valueForKey:@"height"] doubleValue];
-//    LocalMessage* msg = self.messages[indexPath.row];
-//    switch (msg.tag) {
-//        case MessageTypeText:
-//        {
-//            TextCell* cell = (TextCell*)[self tableView:self.tableView cellForRowAtIndexPath:indexPath];
-//            height = [cell height];
-//        }
-//            break;
-//        case MessageTypeImage:
-//        {
-//            ImageCell* cell = (ImageCell*)[self tableView:self.tableView cellForRowAtIndexPath:indexPath];
-//            height = [cell height];
-//        }
-//            break;
-//        default:
-//            height = [super tableView:tableView heightForRowAtIndexPath:indexPath];
-//            break;
-//    }
-    
     return height;
 }
 
@@ -361,6 +329,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
         default:
             break;
     }
+    [cell setValue:[[NSNumber alloc] initWithInteger:indexPath.row] forKey:@"colorIndex"];
     
 }
 
