@@ -33,8 +33,9 @@
     if (_messages == nil) {
         _messages = [[NSMutableArray alloc] init];
     }
-//    UIPanGestureRecognizer *recognizer =
-//    [[UIPanGestureRecognizer alloc]initWithTarget:self
+
+//    UISwipeGestureRecognizer *recognizer =
+//    [[UISwipeGestureRecognizer alloc]initWithTarget:self
 //                                             action:@selector(fetchAction:)];
 //    [self.view addGestureRecognizer:recognizer];
 //    self.tableView.tableHeaderView = self.activityIndicator;
@@ -82,7 +83,7 @@
                                                NSError *connectionError)
      {
          if (connectionError != nil) {
-             NSLog(@"Error during log In");
+             NSLog(@"Error during send msg");
              return;
          }else{
              if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
@@ -96,9 +97,21 @@
      }];
 }
 
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (motion == UIEventSubtypeMotionShake)
+    {
+        // User was shaking the device. Post a notification named "shake."
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"shake" object:self];
+        [self fetchMessage];
+    }
+}
+
 - (void)fetchAction:(id)sender{
-    NSLog(@"Fetch Up");
-    [self fetchMessage];
+    UIGestureRecognizer *recognizer = (UIGestureRecognizer *)sender;
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"Fetch Up");
+        [self fetchMessage];
+    }
 }
 
 - (void) fetchMessage{
@@ -125,7 +138,7 @@
                                                NSError *connectionError)
      {
          if (connectionError != nil) {
-             NSLog(@"Error during log In");
+             NSLog(@"Error during Fetch");
              return;
          }else{
              if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
@@ -143,8 +156,8 @@
          if (jsonParseError != nil) {
              return;
          }
-         NSLog(@"log response:%@",msgs);
-         
+         NSLog(@"fetch response:%@",msgs);
+         sleep(3);
 
          
          dispatch_async(dispatch_get_main_queue(), ^{
@@ -153,12 +166,17 @@
              for (NSDictionary *msg in msgs) {
                  LocalMessage *localMessage = [[LocalMessage alloc] init];
                  localMessage.tag = MessageTypeText;
-                 localMessage.text = [msg valueForKey:@"BalaContent"];
-                 if ((NSNull *)localMessage.text == [NSNull null]) {
+                 
+                 if ((NSNull *)[msg valueForKey:@"BalaContent"] == [NSNull null]) {
                     localMessage.tag = MessageTypeImage;
-                     
+                 }else{
+                     localMessage.text = [msg valueForKey:@"BalaContent"];
                  }
-                 localMessage.email = [msg valueForKey:@"BalerEmail"];
+                 
+                 if ((NSNull*)[msg valueForKey:@"BalerEmail"] != [NSNull null]) {
+                     localMessage.email = [msg valueForKey:@"BalerEmail"];
+                 }
+                 
                  
                  if ([msg valueForKey:@"Photo"] != [NSNull null])
                  localMessage.imageURL = [NSURL URLWithString:[msg valueForKey:@"Photo"]];
@@ -180,7 +198,7 @@
                                 delegate:self
                        cancelButtonTitle:@"Cancel"
                   destructiveButtonTitle:nil
-                       otherButtonTitles:@"Text",@"Image",@"Camera",@"Fetch",nil];
+                       otherButtonTitles:@"Text",@"Image",@"Camera",nil];
     
     
     [actionSheet showInView:self.tableView];
@@ -222,11 +240,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 
             [self presentViewController:imagePicker animated:YES completion:nil];
         
-        }
-            break;
-        case 3:
-        {
-            [self fetchAction:nil];
         }
             break;
         default:
