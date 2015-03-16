@@ -5,6 +5,7 @@
 //  Created by LebinJiang on 15/3/10.
 //  Copyright (c) 2015年 kingsoft. All rights reserved.
 //
+#import <AVFoundation/AVFoundation.h>
 
 #import "MessagesController.h"
 #import "Message.h"
@@ -179,7 +180,7 @@
                  
                  
                  if ([msg valueForKey:@"Photo"] != [NSNull null])
-                 localMessage.imageURL = [NSURL URLWithString:[msg valueForKey:@"Photo"]];
+                     localMessage.imageURL = [NSURL URLWithString:[msg valueForKey:@"Photo"]];
                  if ([msg valueForKey:@"Portrait"] != [NSNull null]) {
                      localMessage.portriatURL =[NSURL URLWithString: [msg valueForKey:@"Portrait"]];
                  }
@@ -321,6 +322,18 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 //    }
     
     return height;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    SystemSoundID audioSoundID;
+    
+    NSString *audioLocalPath = [[NSBundle mainBundle] pathForResource:@"click" ofType:@"wav"];
+    
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:audioLocalPath], &audioSoundID);
+    
+    AudioServicesPlaySystemSound (audioSoundID);
+    
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {

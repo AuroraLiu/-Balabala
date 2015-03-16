@@ -25,6 +25,8 @@
 		86B866C01AB2789200FF7166 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86B866BF1AB2789200FF7166 /* Images.xcassets */; };
 		86B866C31AB2A00B00FF7166 /* LocalMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B866C21AB2A00B00FF7166 /* LocalMessage.m */; };
 		86B866C61AB2A6FB00FF7166 /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B866C51AB2A6FB00FF7166 /* ImageCell.m */; };
+		FFC94EF51AB680E1004B6A6D /* duang.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FFC94EF31AB680E1004B6A6D /* duang.mp3 */; };
+		FFC94EF61AB680E1004B6A6D /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = FFC94EF41AB680E1004B6A6D /* click.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		86B866C21AB2A00B00FF7166 /* LocalMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalMessage.m; sourceTree = "<group>"; };
 		86B866C41AB2A6FB00FF7166 /* ImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
 		86B866C51AB2A6FB00FF7166 /* ImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
+		FFC94EF31AB680E1004B6A6D /* duang.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = duang.mp3; sourceTree = "<group>"; };
+		FFC94EF41AB680E1004B6A6D /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,7 @@
 		86007D741AAECD96005FDFBE /* BalaSimple */ = {
 			isa = PBXGroup;
 			children = (
+				FFC94EF21AB6808C004B6A6D /* Audio Resources */,
 				86584F231AB1D1320027792A /* UIImage+Utils.h */,
 				86584F241AB1D1320027792A /* UIImage+Utils.m */,
 				86163EFC1AB029EA005ECD03 /* BalaApp.xcdatamodeld */,
@@ -169,6 +174,16 @@
 				86007D901AAECD96005FDFBE /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FFC94EF21AB6808C004B6A6D /* Audio Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FFC94EF31AB680E1004B6A6D /* duang.mp3 */,
+				FFC94EF41AB680E1004B6A6D /* click.wav */,
+			);
+			name = "Audio Resources";
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,8 +268,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				86B866C01AB2789200FF7166 /* Images.xcassets in Resources */,
+				FFC94EF51AB680E1004B6A6D /* duang.mp3 in Resources */,
 				86007D811AAECD96005FDFBE /* Main.storyboard in Resources */,
 				86007D861AAECD96005FDFBE /* LaunchScreen.xib in Resources */,
+				FFC94EF61AB680E1004B6A6D /* click.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +426,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BalaSimple/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -422,6 +440,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BalaSimple/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
