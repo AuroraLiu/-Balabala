@@ -48,11 +48,18 @@ static const int len = 150;
         NSLog(@"imageURL:%@\npURL:%@"
               ,self.message.imageURL
               ,self.message.portriatURL);
-        NSData* data = [NSData dataWithContentsOfURL:self.message.imageURL];
-        NSData* pData = [NSData dataWithContentsOfURL:self.message.portriatURL];        
-        dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.message.image == nil && self.message.imageURL != nil) {
+            NSData* data = [NSData dataWithContentsOfURL:self.message.imageURL];
             self.message.image = [[UIImage imageWithData:data] scaleToSize:CGSizeMake(len, len)];
+        }
+        if (self.message.portriat == nil && self.message.portriatURL != nil) {
+            NSData* pData = [NSData dataWithContentsOfURL:self.message.portriatURL];
             self.message.portriat = [[UIImage imageWithData:pData] scaleToSize:CGSizeMake(avatarH, avatarH)];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            
             self.avatarImageView.image = self.message.portriat;
             self.imageView.image = self.message.image;
         });

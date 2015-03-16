@@ -18,8 +18,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication];
-    [appDelegate saveContext];
+//    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication];
+//    [appDelegate saveContext];
 }
 
 @end

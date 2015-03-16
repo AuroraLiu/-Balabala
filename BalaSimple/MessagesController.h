@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface MessagesController : UITableViewController<UIActionSheetDelegate>
+@interface MessagesController : UITableViewController<UIActionSheetDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (strong, nonatomic) NSMutableArray* messages;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 - (void) addTextMessage: (NSString*) message;

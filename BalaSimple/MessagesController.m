@@ -13,7 +13,7 @@
 #include "TextCell.h"
 #include "ImageCell.h"
 
-@interface MessagesController()<UIImagePickerControllerDelegate, UINavigationBarDelegate>
+@interface MessagesController()
 @property (weak, nonatomic) IBOutlet UINavigationItem *nagivationItem;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 - (IBAction)addAction:(id)sender;
@@ -228,18 +228,12 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
         case 1:
         case 2:
         {
-            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-//            imagePicker.sourceType = (buttonIndex == 1)
-//            ? UIImagePickerControllerSourceTypePhotoLibrary
-//            : UIImagePickerControllerSourceTypeCamera;
-            imagePicker.allowsEditing = YES;
-            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-
-            imagePicker.delegate = self;
-            imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-
-            [self presentViewController:imagePicker animated:YES completion:nil];
-        
+            UIImagePickerController* picker = [[UIImagePickerController alloc] init];
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            
+            [self presentViewController:picker animated:YES completion:nil];
         }
             break;
         default:
@@ -363,9 +357,11 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 
 {
     
-//    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-//    selectedImage = image;
-//    NSURL* imageURL = [info objectForKey:UIImagePickerControllerMediaURL];
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    selectedImage = image;
+    NSURL* imageURL = [info objectForKey:UIImagePickerControllerMediaURL];
+
+    [self addImageMessage:image imageURL:imageURL];
     [picker dismissViewControllerAnimated:YES completion:nil];
     
 }
